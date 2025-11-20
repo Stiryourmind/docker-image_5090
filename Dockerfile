@@ -1,5 +1,10 @@
-# ComfyUI for AI Photobooth - Production Ready
-FROM nvidia/cuda:12.4.0-cudnn9-runtime-ubuntu22.04
+# ============================================================
+# ComfyUI + PuLID for RTX 5090
+# CUDA 12.8 + cuDNN 9 (Required for Blackwell Architecture)
+# ============================================================
+
+FROM nvidia/cuda:12.8.0-cudnn-runtime-ubuntu22.04
+
 
 # Build metadata
 LABEL maintainer="stirproductionltd@gmail.com"
@@ -63,10 +68,11 @@ WORKDIR /app/ComfyUI
 # Install PyTorch 2.4.1 (cu124)
 # ============================================================
 RUN pip install --no-cache-dir \
-    torch==2.4.1+cu124 \
-    torchvision==0.19.1+cu124 \
-    torchaudio==2.4.1+cu124 \
-    --index-url https://download.pytorch.org/whl/cu124
+    torch \
+    torchvision \
+    torchaudio \
+    --index-url https://download.pytorch.org/whl/cu128
+
 
 RUN pip install --no-cache-dir -r requirements.txt
 
