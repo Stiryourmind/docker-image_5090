@@ -1,5 +1,5 @@
 # ComfyUI for AI Photobooth - Production Ready
-FROM nvidia/cuda:12.1.0-cudnn8-runtime-ubuntu22.04
+FROM nvidia/cuda:12.4.0-cudnn9-runtime-ubuntu22.04
 
 # Build metadata
 LABEL maintainer="stirproductionltd@gmail.com"
@@ -60,13 +60,13 @@ RUN git clone --depth 1 --branch ${COMFYUI_BRANCH} ${COMFYUI_REPO} ComfyUI
 WORKDIR /app/ComfyUI
 
 # ============================================================
-# Install PyTorch 2.1.2 (cu121)
+# Install PyTorch 2.4.1 (cu124)
 # ============================================================
 RUN pip install --no-cache-dir \
-    torch==2.1.2+cu121 \
-    torchvision==0.16.2+cu121 \
-    torchaudio==2.1.2+cu121 \
-    --index-url https://download.pytorch.org/whl/cu121
+    torch==2.4.1+cu124 \
+    torchvision==0.19.1+cu124 \
+    torchaudio==2.4.1+cu124 \
+    --index-url https://download.pytorch.org/whl/cu124
 
 RUN pip install --no-cache-dir -r requirements.txt
 
