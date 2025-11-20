@@ -1,0 +1,70 @@
+services:
+  comfyui:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      
+      args:
+        UID: 1000
+        GID: 1000
+    image: "stir/comfyui-v0.3.59"
+    container_name: comfyui-aibooth
+    restart: unless-stopped
+    
+    # ==================== GPU SUPPORT ====================
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    
+    # ==================== ENVIRONMENT ====================
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+      - PYTHONUNBUFFERED=1
+      - HF_HOME=/app/ComfyUI/models/huggingface
+      - COMFYUI_PATH=/app/ComfyUI
+    
+    # ==================== VOLUMES ====================
+    volumes:
+      # Models (persistent)
+      - ./models:/app/ComfyUI/models
+      
+      # Input/Output (persistent)
+      - ./input:/app/ComfyUI/input
+      - ./output:/app/ComfyUI/output
+      
+      # User data (persistent) - includes ComfyUI-Manager config
+      - ./user:/app/ComfyUI/user
+      
+      # Custom nodes (persistent)
+      - D:/ComfyUI-Docker/Imageto3Dcartoon_ComfyUI-Docker/models/clip:/app/ComfyUI/models/clip
+      - D:/ComfyUI-Docker/Imageto3Dcartoon_ComfyUI-Docker/models/clip_vision:/app/ComfyUI/models/clip_vision  
+      - D:/ComfyUI-Docker/Imageto3Dcartoon_ComfyUI-Docker/models/diffusion_models:/app/ComfyUI/models/diffusion_models  
+      - D:/ComfyUI-Docker/Imageto3Dcartoon_ComfyUI-Docker/models/LLM:/app/ComfyUI/models/LLM 
+      - D:/ComfyUI-Docker/Imageto3Dcartoon_ComfyUI-Docker/models/loras:/app/ComfyUI/models/loras 
+      - D:/ComfyUI-Docker/Imageto3Dcartoon_ComfyUI-Docker/models/pulid:/app/ComfyUI/models/pulid 
+      - D:/ComfyUI-Docker/Imageto3Dcartoon_ComfyUI-Docker/models/style_models:/app/ComfyUI/models/style_models 
+      - D:/ComfyUI-Docker/Imageto3Dcartoon_ComfyUI-Docker/models/vae:/app/ComfyUI/models/vae 
+    
+    # ==================== PORTS ====================
+    ports:
+      - "8188:8188"
+    
+    # ==================== HEALTHCHECK ====================
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8188/system_stats"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 90s
+    
+    # ==================== LOGGING ====================
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"

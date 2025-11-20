@@ -1,0 +1,14 @@
+# ComfyUI Manager - MUST BE FIRST!
+https://github.com/ltdrdata/ComfyUI-Manager.git
+https://github.com/cubiq/ComfyUI_essentials.git
+https://github.com/crystian/ComfyUI-Crystools.git
+https://github.com/rgthree/rgthree-comfy.git
+https://github.com/kijai/ComfyUI-KJNodes.git
+https://github.com/ssitu/ComfyUI_UltimateSDUpscale.git
+https://github.com/chflame163/ComfyUI_LayerStyle.git
+https://github.com/yolain/ComfyUI-Easy-Use.git
+https://github.com/kaibioinfo/ComfyUI_AdvancedRefluxControl.git
+https://github.com/ltdrdata/ComfyUI-Impact-Pack.git
+https://github.com/kijai/ComfyUI-Florence2.git
+https://github.com/sipherxyz/comfyui-art-venture.git
+#https://github.com/lldacing/ComfyUI_PuLID_Flux_ll.git

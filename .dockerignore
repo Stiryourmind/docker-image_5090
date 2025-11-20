@@ -1,0 +1,35 @@
+# ComfyUI .dockerignore
+# Excludes unnecessary files from Docker build context
+
+# Volume directories (mounted separately)
+models/
+input/
+output/
+user/
+custom_nodes/
+temp/
+
+# Version control
+.git/
+.gitignore
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.Python
+
+# Environment files
+.env*
+
+# IDE
+.vscode/
+.idea/
+
+# Logs and temp files
+*.log
+*.tmp
+
+# Docker files
+docker-compose*.yml
+.dockerignore
